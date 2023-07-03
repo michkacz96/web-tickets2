@@ -13,4 +13,8 @@ class Customer extends Model
     public function emails(){
         return $this->hasMany(CustomerEmail::class, 'customer_id', 'id');
     }
+
+    public function phones(){
+        return $this->hasMany(CustomerPhone::class, 'customer_id', 'id');
+    }
 }
