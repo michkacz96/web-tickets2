@@ -9,4 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CustomerEmail extends Model
 {
     use HasFactory, SoftDeletes;
+
+    public function customer(){
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
+    }
 }
