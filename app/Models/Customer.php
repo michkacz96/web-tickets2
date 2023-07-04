@@ -10,6 +10,13 @@ class Customer extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'name',
+        'full_name',
+        'tax_id',
+        'licence_number',
+    ];
+
     public function emails(){
         return $this->hasMany(CustomerEmail::class, 'customer_id', 'id');
     }
