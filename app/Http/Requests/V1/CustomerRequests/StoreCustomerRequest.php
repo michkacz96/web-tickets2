@@ -41,23 +41,10 @@ class StoreCustomerRequest extends FormRequest
             $this->merge(['full_name' => $this->name]);
         }
         if(!empty($this->taxId)){
-            $this->merge(['tax_id' => $this->taxId]);
+            $this->merge(['tax_id' => preg_replace('/\s+/', '', $this->taxId)]);
         }
         if(!empty($this->licenceNumber)){
             $this->merge(['licence_number' => $this->licenceNumber]);
         }
-    }
-
-    /**
-     * Handle a passed validation attempt.
-     */
-    protected function passedValidation(): void
-    {
-        $this->replace([
-            'name' => $this->name,
-            'full_name' => $this->full_name,
-            'tax_id' => preg_replace('/\s+/', '', $this->tax_id),
-            'licence_number' => preg_replace('/\s+/', '', $this->licence_number),
-        ]);
     }
 }
