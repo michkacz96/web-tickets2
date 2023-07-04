@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\V1\BaseApiController;
 use App\Http\Requests\V1\CustomerRequests\StoreCustomerRequest;
+use App\Http\Requests\V1\CustomerRequests\UpdateCustomerRequest;
 use App\Http\Resources\V1\CustomerCollection;
 use App\Http\Resources\V1\CustomerResource;
 use App\Models\Customer;
@@ -37,6 +38,20 @@ class CustomerController extends BaseApiController
      */
     public function store(StoreCustomerRequest $request){
         return $this->successResponse('Customer created successfully', new CustomerResource(Customer::create($request->all())));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateCustomerRequest $request, int $id){
+        $customer = Customer::find($id);
+
+        if(is_null($customer)){
+            return $this->errorResponse('Bad Request', 400);
+        }
+
+        $customer->update($request->all());
+        return $this->successResponse('Customer updated successfully', new CustomerResource($customer));
     }
 
     /**
