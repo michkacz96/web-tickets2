@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('v1')->group(function (){
+    Route::controller(App\Http\Controllers\Api\V1\CustomerController::class)->group(function (){
+        Route::get('customers', 'index');
+        Route::get('customers/{customer}', 'show');
+        Route::post('customers', 'store');
+        Route::match(['put', 'patch'], 'customers/{customer}', 'update');
+        Route::delete('customers/{customer}', 'destroy');
+    });
 });
