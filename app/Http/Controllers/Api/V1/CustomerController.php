@@ -36,4 +36,19 @@ class CustomerController extends Controller
     public function store(StoreCustomerRequest $request){
         return new CustomerResource(Customer::create($request->all()));
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(int $id){
+        $customer = Customer::find($id);
+
+        if(is_null($customer)){
+            return response()->noContent();
+        }
+
+        if($customer->delete()){
+            return response('Resource deleted succesfully');
+        }
+    }
 }
