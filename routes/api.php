@@ -22,4 +22,11 @@ Route::prefix('v1')->group(function (){
         Route::match(['put', 'patch'], 'customers/{customer}', 'update');
         Route::delete('customers/{customer}', 'destroy');
     });
+    Route::controller(App\Http\Controllers\Api\V1\CustomerEmailController::class)->group(function (){
+        Route::get('customer-emails', 'index');
+        Route::get('customer-emails/{customer_email}', 'show');
+        Route::post('customer-emails', 'store');
+        Route::match(['put', 'patch'], 'customer-emails/{customer_email}', 'update');
+        Route::delete('customer-emails/{customer_email}', 'destroy');
+    });
 });
