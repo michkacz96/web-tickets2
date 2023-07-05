@@ -31,13 +31,19 @@ class CustomerController extends BaseApiController
     /**
      * Display the specified resource.
      */
-    public function show(int $id){
-        $customer = Customer::find($id);
-
-        if(is_null($customer)){
+    public function show(Request $request, int $id){
+        if(is_null(Customer::find($id))){
             return response()->noContent();
         }
 
+        $customer = Customer::where('id', $id);
+        $includeEmails = $request->query('includeEmails');
+
+        if($includeEmails){
+            $customer = $customer->with('emails');
+        }
+
+        $customer = $customer->first();
         return $this->successResponse('Customer retrived successfully', new CustomerResource($customer));
     }
 
