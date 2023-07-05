@@ -10,6 +10,13 @@ class CustomerEmail extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'customer_id',
+        'email',
+        'name',
+        'tags'
+    ];
+
     public function customer(){
         return $this->belongsTo(Customer::class, 'customer_id', 'id');
     }
