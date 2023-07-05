@@ -17,11 +17,15 @@ class CustomerController extends BaseApiController
      */
     public function index(Request $request){
         $includeEmails = $request->query('includeEmails');
+        $includePhones = $request->query('includePhones');
 
         $customers = Customer::select();
 
         if($includeEmails){
             $customers = $customers->with('emails');
+        }
+        if($includePhones){
+            $customers = $customers->with('phones');
         }
 
         $customers = $customers->get();
