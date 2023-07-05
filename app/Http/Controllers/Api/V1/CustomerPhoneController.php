@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\V1\BaseApiController;
+use App\Http\Requests\V1\CustomerPhoneRequests\StoreCustomerPhoneRequest;
 use App\Http\Resources\V1\CustomerPhoneCollection;
 use App\Http\Resources\V1\CustomerPhoneResource;
 use App\Models\CustomerPhone;
@@ -22,9 +23,9 @@ class CustomerPhoneController extends BaseApiController
     /**
      * Store a newly created resource in storage.
      */
-    public function store()
+    public function store(StoreCustomerPhoneRequest $request)
     {
-        //
+        return $this->successResponse('Customer\'s phone created successfully', new CustomerPhoneResource(CustomerPhone::create($request->all())));
     }
 
     /**
