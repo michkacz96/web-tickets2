@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Customer extends Model
 {
@@ -17,11 +18,11 @@ class Customer extends Model
         'licence_number',
     ];
 
-    public function emails(){
-        return $this->hasMany(CustomerEmail::class, 'customer_id', 'id');
+    public function emails(): HasMany{
+        return $this->hasMany(CustomerEmail::class);
     }
 
-    public function phones(){
+    public function phones(): HasMany{
         return $this->hasMany(CustomerPhone::class, 'customer_id', 'id');
     }
 }
