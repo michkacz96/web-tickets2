@@ -24,7 +24,7 @@ class StoreCustomerEmailRequest extends FormRequest
     {
         return [
             'customerId' => ['required', 'int', 'exists:customers,id'],
-            'email' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
             'name' => ['required', 'string', 'max:100'],
             'tags' => ['nullable', 'string', 'max:255'],
         ];
