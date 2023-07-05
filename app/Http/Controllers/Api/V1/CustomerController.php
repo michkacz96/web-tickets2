@@ -42,9 +42,13 @@ class CustomerController extends BaseApiController
 
         $customer = Customer::where('id', $id);
         $includeEmails = $request->query('includeEmails');
+        $includePhones = $request->query('includePhones');
 
         if($includeEmails){
             $customer = $customer->with('emails');
+        }
+        if($includePhones){
+            $customer = $customer->with('phones');
         }
 
         $customer = $customer->first();
