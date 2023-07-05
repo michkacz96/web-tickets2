@@ -8,15 +8,23 @@ use App\Http\Requests\V1\CustomerRequests\UpdateCustomerRequest;
 use App\Http\Resources\V1\CustomerCollection;
 use App\Http\Resources\V1\CustomerResource;
 use App\Models\Customer;
+use Illuminate\Http\Request;
 
 class CustomerController extends BaseApiController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(){
-        $customers = Customer::all();
+    public function index(Request $request){
+        $includeEmails = $request->query('includeEmails');
 
+        $customers = Customer::select();
+
+        if($includeEmails){
+            $customers = $customers->with('emails');
+        }
+
+        $customers = $customers->get();
         return $this->successResponse('Customers retrived successfully. Number of resources: '.count($customers), new CustomerCollection($customers));
     }
 
