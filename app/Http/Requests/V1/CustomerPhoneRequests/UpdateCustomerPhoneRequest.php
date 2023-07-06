@@ -11,7 +11,8 @@ class UpdateCustomerPhoneRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        //TODO - authorization
+        return true;
     }
 
     /**
