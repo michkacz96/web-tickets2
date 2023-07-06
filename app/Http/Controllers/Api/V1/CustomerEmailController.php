@@ -61,8 +61,16 @@ class CustomerEmailController extends BaseApiController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy()
+    public function destroy(int $id)
     {
-        //
+        $email = CustomerEmail::find($id);
+
+        if(is_null($email)){
+            return response()->noContent();
+        }
+
+        if($email->delete()){
+            return $this->successResponse('Customer\'s email deleted successfully', null);
+        }
     }
 }
