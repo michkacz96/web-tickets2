@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\V1\BaseApiController;
 use App\Http\Requests\V1\CustomerPhoneRequests\StoreCustomerPhoneRequest;
+use App\Http\Requests\V1\CustomerPhoneRequests\UpdateCustomerPhoneRequest;
 use App\Http\Resources\V1\CustomerPhoneCollection;
 use App\Http\Resources\V1\CustomerPhoneResource;
 use App\Models\CustomerPhone;
@@ -45,9 +46,16 @@ class CustomerPhoneController extends BaseApiController
     /**
      * Update the specified resource in storage.
      */
-    public function update()
+    public function update(UpdateCustomerPhoneRequest $request, int $id)
     {
-        //
+        $phone = CustomerPhone::find($id);
+
+        if(is_null($phone)){
+            return $this->errorResponse('Bad Request', 400);
+        }
+
+        $phone->update($request->all());
+        return $this->successResponse('Customer\'s phone number updated successfully', new CustomerPhoneResource($phone));
     }
 
     /**
