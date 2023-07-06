@@ -61,8 +61,16 @@ class CustomerPhoneController extends BaseApiController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy()
+    public function destroy(int $id)
     {
-        //
+        $phone = CustomerPhone::find($id);
+
+        if(is_null($phone)){
+            return response()->noContent();
+        }
+
+        if($phone->delete()){
+            return $this->successResponse('Customer\'s phone number deleted successfully', null);
+        }
     }
 }
