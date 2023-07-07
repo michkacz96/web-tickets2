@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('support_tickets', function (Blueprint $table) {
-            $table->uuid();
+            $table->id();
             $table->timestamps();
             $table->foreignId('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');

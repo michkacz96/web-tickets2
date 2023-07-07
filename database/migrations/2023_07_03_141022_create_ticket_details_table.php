@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('ticket_details', function (Blueprint $table) {
             $table->uuid();
             $table->timestamps();
-            $table->foreignUuid('ticket_uuid');
-            $table->foreign('ticket_uuid')->references('support_ticket')->on('uuid')->onDelete('cascade');
+            $table->foreignid('ticket_id');
+            $table->foreign('ticket_uuid')->references('support_ticket')->on('id')->onDelete('cascade');
             $table->string('type', 1); //N - new, A - assaign, I - in progress, C - closed
             $table->string('priority', 1); // L - low priority, M - medium, H - high, U - urgent
             $table->text('message');
