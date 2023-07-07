@@ -24,4 +24,12 @@ class SupportTicket extends Model
     public function category(): BelongsTo{
         return $this->belongsTo(TicketCategory::class);
     }
+
+    public function createdBy(): BelongsTo{
+        return $this->belongsTo(User::class, 'created_by', 'id');
+    }
+
+    public function closedBy(): BelongsTo{
+        return $this->belongsTo(User::class, 'closed_by', 'id');
+    }
 }
