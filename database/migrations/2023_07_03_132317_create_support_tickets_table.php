@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreignId('created_by');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
-            $table->foreignId('closed_by');
+            $table->foreignId('closed_by')->nullable();
             $table->foreign('closed_by')->references('id')->on('users')->onDelete('cascade');
             $table->text('description');
             $table->string('customer_contact_type', 1); //E - email, P - phone
