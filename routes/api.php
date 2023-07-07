@@ -38,7 +38,7 @@ Route::prefix('v1')->group(function (){
     });
     Route::controller(App\Http\Controllers\Api\V1\TicketCategoryController::class)->group(function (){
         Route::get('ticket-categories', 'index');
-        Route::get('ticket-categories', 'show');
+        Route::get('ticket-categories/{ticket_category}', 'show');
         Route::post('ticket-categories', 'store');
         Route::match(['put', 'patch'], 'ticket-categories/{ticket_category}', 'update');
         Route::delete('ticket-categories/{ticket_category}', 'destroy');
