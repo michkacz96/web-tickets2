@@ -11,6 +11,16 @@ class SupportTicket extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = [
+        'customer_id',
+        'category_id',
+        'created_by',
+        'closed_by',
+        'description',
+        'customer_contact_type',
+        'customer_contact',
+    ];
+
     public function category(): BelongsTo{
         return $this->belongsTo(TicketCategory::class);
     }
