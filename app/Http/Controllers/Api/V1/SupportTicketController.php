@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\V1\BaseApiController;
+use App\Http\Requests\V1\SupportTicketRequests\StoreSupportTicketRquest;
+use App\Http\Resources\V1\SupportTicketResource;
 use App\Models\SupportTicket;
 
 class SupportTicketController extends BaseApiController
@@ -18,9 +20,9 @@ class SupportTicketController extends BaseApiController
     /**
      * Store a newly created resource in storage.
      */
-    public function store()
+    public function store(StoreSupportTicketRquest $request)
     {
-        //
+        return $this->successResponse('Support ticket created successfully', new SupportTicketResource(SupportTicket::create($request->all())));
     }
 
     /**
