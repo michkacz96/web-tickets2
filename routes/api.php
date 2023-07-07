@@ -36,4 +36,11 @@ Route::prefix('v1')->group(function (){
         Route::match(['put', 'patch'], 'customer-phones/{customer_phone}', 'update');
         Route::delete('customer-phones/{customer_phone}', 'destroy');
     });
+    Route::controller(App\Http\Controllers\Api\V1\TicketCategoryController::class)->group(function (){
+        Route::get('ticket-categories', 'index');
+        Route::get('ticket-categories', 'show');
+        Route::post('ticket-categories', 'store');
+        Route::match(['put', 'patch'], 'ticket-categories/{ticket_category}', 'update');
+        Route::delete('ticket-categories/{ticket_category}', 'destroy');
+    });
 });
