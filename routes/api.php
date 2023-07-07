@@ -43,4 +43,11 @@ Route::prefix('v1')->group(function (){
         Route::match(['put', 'patch'], 'ticket-categories/{ticket_category}', 'update');
         Route::delete('ticket-categories/{ticket_category}', 'destroy');
     });
+    Route::controller(App\Http\Controllers\Api\V1\SupportTicketController::class)->group(function (){
+        Route::get('support-tickets', 'index');
+        Route::get('support-tickets/{support_ticket}', 'show');
+        Route::post('support-tickets', 'store');
+        Route::match(['put', 'patch'], 'support-tickets/{support_ticket}', 'update');
+        Route::delete('support-tickets/{support_ticket}', 'destroy');
+    });
 });
