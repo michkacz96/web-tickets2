@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Customer::factory(50)->create();
+        \App\Models\TicketCategory::factory(150)->create();
     }
 }
