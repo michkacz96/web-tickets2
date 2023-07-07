@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\V1\BaseApiController;
 use App\Http\Requests\V1\TicketCategoryRequests\StoreTicketCategoryRequest;
+use App\Http\Requests\V1\TicketCategoryRequests\UpdateTicketCategoryRequest;
 use App\Http\Resources\V1\TicketCategoryCollection;
 use App\Http\Resources\V1\TicketCategoryResource;
 use App\Models\TicketCategory;
@@ -44,9 +45,16 @@ class TicketCategoryController extends BaseApiController
     /**
      * Update the specified resource in storage.
      */
-    public function update()
+    public function update(UpdateTicketCategoryRequest $request, int $id)
     {
-        //
+        $ticket = TicketCategory::find($id);
+
+        if(is_null($ticket)){
+            return $this->errorResponse('Bad Request', 400);
+        }
+
+        $ticket->update($request->all());
+        return $this->successResponse('Ticket category updated successfully', new TicketCategoryResource($ticket));
     }
 
     /**
