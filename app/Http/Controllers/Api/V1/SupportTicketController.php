@@ -60,8 +60,16 @@ class SupportTicketController extends BaseApiController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy()
+    public function destroy(int $id)
     {
-        //
+        $ticket = SupportTicket::find($id);
+
+        if(is_null($ticket)){
+            return response()->noContent();
+        }
+
+        if($ticket->delete()){
+            return response()->noContent();
+        }
     }
 }
