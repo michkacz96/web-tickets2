@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\V1\BaseApiController;
 use App\Http\Requests\V1\SupportTicketRequests\StoreSupportTicketRquest;
+use App\Http\Resources\V1\SupportTicketCollection;
 use App\Http\Resources\V1\SupportTicketResource;
 use App\Models\SupportTicket;
 
@@ -14,7 +15,8 @@ class SupportTicketController extends BaseApiController
      */
     public function index()
     {
-        //
+        $tickets = SupportTicket::all();
+        return $this->successResponse('Ticket categories retrived successfully. Number of resources: '.count($tickets), new SupportTicketCollection($tickets));
     }
 
     /**
@@ -28,9 +30,15 @@ class SupportTicketController extends BaseApiController
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(int $id)
     {
-        //
+        $ticket = SupportTicket::find($id);
+
+        if(is_null($ticket)){
+            return $this->errorResponse("Resource not found");
+        }
+
+        return $this->successResponse('Customer\'s phone retrived successfully', new SupportTicketResource($ticket));
     }
 
     /**
