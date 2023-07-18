@@ -16,6 +16,7 @@ class SupportTicket extends Model
         'category_id',
         'created_by',
         'closed_by',
+        'priority',
         'description',
         'customer_contact_type',
         'customer_contact',
