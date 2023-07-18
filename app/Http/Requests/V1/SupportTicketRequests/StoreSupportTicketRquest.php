@@ -27,6 +27,7 @@ class StoreSupportTicketRquest extends FormRequest
             'customerId' => ['required', 'int', 'exists:customers,id'],
             'categoryId' => ['required', 'int', 'exists:ticket_categories,id'],
             'createdBy' => ['required', 'int', 'exists:users,id'],
+            'priority' => ['required', Rule::in(['L', 'M', 'H', 'U']),
             'description' => ['required', 'string', 'max:255'],
             'customerContactType' => ['required', Rule::in(['E', 'P'])],
             'customerContact' => ['required', 'string'],
