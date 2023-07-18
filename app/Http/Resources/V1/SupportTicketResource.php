@@ -20,6 +20,7 @@ class SupportTicketResource extends JsonResource
             'category' => new TicketCategoryResource($this->category),
             'createdBy' => $this->created_by,
             'closedBy' => $this->closed_by,
+            'priority' => $this->priority,
             'description' => $this->description,
             'customerContactType' => $this->customer_contact_type,
             'customerContact' => $this->customer_contact,
