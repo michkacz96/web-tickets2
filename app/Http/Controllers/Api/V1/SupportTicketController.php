@@ -38,7 +38,7 @@ class SupportTicketController extends BaseApiController
             return $this->errorResponse("Resource not found");
         }
 
-        return $this->successResponse('Customer\'s phone retrived successfully', new SupportTicketResource($ticket));
+        return $this->successResponse('Ticket retrived successfully', new SupportTicketResource($ticket));
     }
 
     /**
