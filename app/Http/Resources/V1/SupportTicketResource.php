@@ -16,7 +16,7 @@ class SupportTicketResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'customer' => $this->customer_id,
+            'customer' => new CustomerResource($this->customer),
             'category' => new TicketCategoryResource($this->category),
             'createdBy' => $this->created_by,
             'closedBy' => $this->closed_by,

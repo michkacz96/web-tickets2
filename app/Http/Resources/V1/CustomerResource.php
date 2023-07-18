@@ -22,6 +22,7 @@ class CustomerResource extends JsonResource
             'licenceNumber' => $this->licence_number,
             'emails' => new CustomerEmailCollection($this->whenLoaded('emails')),
             'phones' => new CustomerPhoneCollection($this->whenLoaded('phones')),
+            'supportTickets' => new SupportTicketCollection($this->whenLoaded('tickets')),
         ];
     }
 }

@@ -32,4 +32,8 @@ class SupportTicket extends Model
     public function closedBy(): BelongsTo{
         return $this->belongsTo(User::class, 'closed_by', 'id');
     }
+
+    public function customer(): BelongsTo{
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
+    }
 }

@@ -25,4 +25,8 @@ class Customer extends Model
     public function phones(): HasMany{
         return $this->hasMany(CustomerPhone::class, 'customer_id', 'id');
     }
+
+    public function tickets(): HasMany{
+        return $this->hasMany(SupportTicket::class, 'customer_id', 'id');
+    }
 }
