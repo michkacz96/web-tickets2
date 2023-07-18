@@ -17,12 +17,12 @@ class SupportTicketResource extends JsonResource
         return [
             'id' => $this->id,
             'customer' => $this->customer_id,
-            'category' => $this->category_id,
+            'category' => new TicketCategoryResource($this->category),
             'createdBy' => $this->created_by,
             'closedBy' => $this->closed_by,
             'description' => $this->description,
             'customerContactType' => $this->customer_contact_type,
-            'customerContact' => $this->customerContact,
+            'customerContact' => $this->customer_contact,
         ];
     }
 }
