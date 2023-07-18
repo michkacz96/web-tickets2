@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('support_tickets', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
             $table->foreignId('customer_id');
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreignId('category_id');
