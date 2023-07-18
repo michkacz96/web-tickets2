@@ -22,6 +22,21 @@ class SupportTicket extends Model
         'customer_contact',
     ];
 
+    private array $priorities = [
+        'L' => 'Low',
+        'M' => 'Medium',
+        'H' => 'High',
+        'U' => 'Urgent',
+    ];
+    
+    /**
+     * returns full name of priority from priorities table
+     * @return string full name of priority
+     */
+    public function priority(): string{
+        return $this->priorities[$this->priority];
+    }
+
     public function category(): BelongsTo{
         return $this->belongsTo(TicketCategory::class);
     }
