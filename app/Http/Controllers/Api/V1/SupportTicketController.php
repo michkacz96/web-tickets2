@@ -17,7 +17,7 @@ class SupportTicketController extends BaseApiController
     public function index()
     {
         $tickets = SupportTicket::all();
-        return $this->successResponse('Ticket categories retrived successfully. Number of resources: '.count($tickets), new SupportTicketCollection($tickets));
+        return $this->successResponse('Support tickets retrived successfully. Number of resources: '.count($tickets), new SupportTicketCollection($tickets));
     }
 
     /**
@@ -39,7 +39,7 @@ class SupportTicketController extends BaseApiController
             return $this->errorResponse("Resource not found");
         }
 
-        return $this->successResponse('Ticket retrived successfully', new SupportTicketResource($ticket));
+        return $this->successResponse('Support ticket retrived successfully', new SupportTicketResource($ticket));
     }
 
     /**
@@ -54,7 +54,7 @@ class SupportTicketController extends BaseApiController
         }
 
         $ticket->update($request->all());
-        return $this->successResponse('Ticket category updated successfully', new SupportTicketResource($ticket));
+        return $this->successResponse('Support ticket updated successfully', new SupportTicketResource($ticket));
     }
 
     /**
