@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\V1\BaseApiController;
 use App\Http\Requests\V1\SupportTicketRequests\StoreSupportTicketRquest;
+use App\Http\Requests\V1\SupportTicketRequests\UpdateSupportTicketRequest;
 use App\Http\Resources\V1\SupportTicketCollection;
 use App\Http\Resources\V1\SupportTicketResource;
 use App\Models\SupportTicket;
@@ -44,9 +45,16 @@ class SupportTicketController extends BaseApiController
     /**
      * Update the specified resource in storage.
      */
-    public function update()
+    public function update(UpdateSupportTicketRequest $request, int $id)
     {
-        //
+        $ticket = SupportTicket::find($id);
+
+        if(is_null($ticket)){
+            return $this->errorResponse('No resource to update');
+        }
+
+        $ticket->update($request->all());
+        return $this->successResponse('Ticket category updated successfully', new SupportTicketResource($ticket));
     }
 
     /**
