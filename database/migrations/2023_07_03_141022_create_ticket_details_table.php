@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignid('ticket_id');
             $table->foreign('ticket_id')->references('support_ticket')->on('id')->onDelete('cascade');
             $table->string('type', 1); //N - new, A - assaign, I - in progress, C - closed
-            $table->string('priority', 1); // L - low priority, M - medium, H - high, U - urgent
             $table->text('message');
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('users')->on('id')->onDelete('cascade');

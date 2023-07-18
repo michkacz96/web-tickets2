@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->foreignId('closed_by')->nullable();
             $table->foreign('closed_by')->references('id')->on('users')->onDelete('cascade');
+            $table->string('priority', 1); // L - low priority, M - medium, H - high, U - urgent
             $table->text('description');
             $table->string('customer_contact_type', 1); //E - email, P - phone
             $table->string('customer_contact', 255);
