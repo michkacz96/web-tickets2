@@ -21,4 +21,8 @@ class TicketDetail extends Model
     public function ticket(): BelongsTo{
         return $this->belongsTo(SupportTicket::class, 'ticket_id', 'id');
     }
+
+    public function user(): BelongsTo{
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }

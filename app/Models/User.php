@@ -50,4 +50,8 @@ class User extends Authenticatable
     public function closedTickets(): HasMany{
         return $this->hasMany(SupportTicket::class, 'closed_by', 'id');
     }
+
+    public function ticketDetails(): HasMany{
+        return $this->hasMany(TicketDetail::class);
+    }
 }
