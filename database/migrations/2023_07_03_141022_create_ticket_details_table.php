@@ -16,8 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->foreignid('ticket_id');
             $table->foreign('ticket_id')->references('support_ticket')->on('id')->onDelete('cascade');
-            $table->string('action', 1); //L - log M - message
-            $table->string('type', 1); //N - new, A - assaign, I - in progress, C - closed
+            $table->string('action', 1)->default('M'); //L - log M - message
             $table->text('message');
             $table->foreignId('user_id');
             $table->foreign('user_id')->references('users')->on('id')->onDelete('cascade');
