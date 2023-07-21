@@ -60,8 +60,16 @@ class TicketDetailController extends BaseApiController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy()
+    public function destroy(string $id)
     {
-        //
+        $ticketDetail = TicketDetail::find($id);
+
+        if(is_null($ticketDetail)){
+            return response()->noContent();
+        }
+
+        if($ticketDetail->delete()){
+            return response()->noContent();
+        }
     }
 }
