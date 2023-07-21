@@ -8,15 +8,24 @@ use App\Http\Requests\V1\SupportTicketRequests\UpdateSupportTicketRequest;
 use App\Http\Resources\V1\SupportTicketCollection;
 use App\Http\Resources\V1\SupportTicketResource;
 use App\Models\SupportTicket;
+use Illuminate\Http\Request;
 
 class SupportTicketController extends BaseApiController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tickets = SupportTicket::all();
+        $includeTicketDetails = $request->query('includeDetails');
+
+        $tickets = SupportTicket::select();
+
+        if($includeTicketDetails){
+            $tickets = $tickets->with('ticketDetails');
+        }
+
+        $tickets = $tickets->get();
         return $this->successResponse('Support tickets retrived successfully. Number of resources: '.count($tickets), new SupportTicketCollection($tickets));
     }
 
@@ -31,14 +40,21 @@ class SupportTicketController extends BaseApiController
     /**
      * Display the specified resource.
      */
-    public function show(int $id)
+    public function show(Request $request, int $id)
     {
-        $ticket = SupportTicket::find($id);
+        $includeTicketDetails = $request->query('includeDetails');
 
-        if(is_null($ticket)){
+        $ticket = SupportTicket::where('id', $id);
+
+        if(is_null($ticket->first())){
             return $this->errorResponse("Resource not found");
         }
 
+        if($includeTicketDetails){
+            $ticket = $ticket->with('ticketDetails');
+        }
+
+        $ticket = $ticket->first();
         return $this->successResponse('Support ticket retrived successfully', new SupportTicketResource($ticket));
     }
 

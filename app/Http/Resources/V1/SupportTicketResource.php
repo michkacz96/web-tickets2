@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\V1;
 
+use App\Models\TicketDetail;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -24,6 +25,7 @@ class SupportTicketResource extends JsonResource
             'description' => $this->description,
             'customerContactType' => $this->customer_contact_type,
             'customerContact' => $this->customer_contact,
+            'ticketDetails' => new TicketDetailCollection($this->whenLoaded('ticketDetails')),
         ];
     }
 }
