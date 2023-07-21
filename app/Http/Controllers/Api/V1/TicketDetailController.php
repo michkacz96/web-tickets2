@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Api\V1\BaseApiController;
 use App\Http\Requests\V1\TicketDetailRequests\StoreTicketDetailRequest;
+use App\Http\Requests\V1\TicketDetailRequests\UpdateTicketDetailRequest;
 use App\Http\Resources\V1\TicketDetailCollection;
 use App\Http\Resources\V1\TicketDetailResource;
 use App\Models\TicketDetail;
@@ -44,9 +45,16 @@ class TicketDetailController extends BaseApiController
     /**
      * Update the specified resource in storage.
      */
-    public function update()
+    public function update(UpdateTicketDetailRequest $request, string $id)
     {
-        //
+        $ticketDetail = TicketDetail::find($id);
+
+        if(is_null($ticketDetail)){
+            return $this->errorResponse('No resource to update');
+        }
+
+        $ticketDetail->update($request->all());
+        return $this->successResponse('Ticket detail updated successfully', new TicketDetailResource($ticketDetail));
     }
 
     /**
