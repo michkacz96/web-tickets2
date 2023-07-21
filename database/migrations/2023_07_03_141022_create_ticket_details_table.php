@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ticket_details', function (Blueprint $table) {
-            $table->uuid();
+            $table->uuid('id')->primary();
             $table->timestamps();
             $table->foreignid('ticket_id');
-            $table->foreign('ticket_id')->references('support_ticket')->on('id')->onDelete('cascade');
+            $table->foreign('ticket_id')->references('id')->on('support_tickets')->onDelete('cascade');
             $table->string('action', 1)->default('M'); //L - log M - message
             $table->text('message');
             $table->foreignId('user_id');
-            $table->foreign('user_id')->references('users')->on('id')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
