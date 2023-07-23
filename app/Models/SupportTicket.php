@@ -57,4 +57,14 @@ class SupportTicket extends Model
     public function ticketDetails(): HasMany{
         return $this->hasMany(TicketDetail::class, 'ticket_id', 'id')->orderBy('created_at', 'DESC');
     }
+
+    /**
+     * Get all possible priorities where key - priority symbol, value - priority name
+     * @return array array of priorities
+     */
+    public static function getPriorityAray(): array{
+        $self = new self;
+
+        return $self->priorities;
+    }
 }
