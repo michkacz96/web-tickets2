@@ -3,6 +3,12 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Customer;
+use App\Models\CustomerEmail;
+use App\Models\CustomerPhone;
+use App\Models\SupportTicket;
+use App\Models\TicketCategory;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -12,14 +18,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory(10)->create();
+        $users = User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $categories = TicketCategory::factory(12)->create();
+        
 
-        \App\Models\Customer::factory(50)->create();
-        \App\Models\TicketCategory::factory(150)->create();
+        for($i = 0; $i < 50; $i++){
+            Customer::factory()
+                ->has(CustomerEmail::factory()->count(fake()->numberBetween(0, 3)), 'emails')
+                ->has(CustomerPhone::factory()->count(fake()->numberBetween(0, 3)), 'phones')
+                ->has(SupportTicket::factory()
+                    ->for($categories[fake()->numberBetween(0, count($categories) - 1)], 'category')
+                    ->for($users[fake()->numberBetween(0, count($users) - 1)], 'createdBy')
+                    ->for($users[fake()->numberBetween(0, count($users) - 1)], 'closedBy')
+                    ->count(fake()->numberBetween(0, 100)), 'tickets')
+                ->has(SupportTicket::factory()
+                ->for($categories[fake()->numberBetween(0, count($categories) - 1)], 'category')
+                ->for($users[fake()->numberBetween(0, count($users) - 1)], 'createdBy')
+                ->count(fake()->numberBetween(0, 30)), 'tickets')
+                ->create();
+        }
     }
 }
